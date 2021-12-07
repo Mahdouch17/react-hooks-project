@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Rating } from "react-simple-star-rating";
 
 function MovieCard(props) {
   // console.log("props: ", props);
@@ -17,7 +18,12 @@ function MovieCard(props) {
       <h1>{props.value.title}</h1>
       <div>{props.value.description}</div>
       <div>
-        <strong>rating:</strong> {props.value.rating}%
+        <Rating
+          readonly={true}
+          onClick
+          ratingValue={props.value.rating}
+          allowHalfIcon={true}
+        />
       </div>
     </div>
   );

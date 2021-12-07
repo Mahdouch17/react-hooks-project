@@ -1,30 +1,15 @@
 import React, { useState } from "react";
+import { Rating } from "react-simple-star-rating";
 
 function AddMovie({ addMovie }) {
   const [movie, setMovie] = useState({
     title: "",
     description: "",
     posterURL: "",
-    rating: "",
   });
-  //   const [title, setTitle] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [posterURL, setposterURL] = useState("");
-  //   const [rating, setRating] = useState("");
-
-  //   const handleTitle = (e) => setTitle(e.target.value);
-  //   const handleDescription = (e) => setDescription(e.target.value);
-  //   const handlePoster = (e) => setposterURL(e.target.value);
-  //   const handleRating = (e) => setRating(e.target.valueAsNumber);
-
-  //   const addMovie = () => {
-  //     setFilms([...films, { id: films.length, title, description, rating }]);
-  //     setTitle("");
-  //     setDescription("");
-  //     setRating("");
-  //   };
+  const [rating,setRating] = useState(0)
+  const handleRating = (e) => setRating(e);
   const handleMovie = (e) => {
-    e.persist();
     setMovie((prevMovie) => ({
       ...prevMovie,
       [e.target.name]: e.target.value,
@@ -37,7 +22,7 @@ function AddMovie({ addMovie }) {
       title: movie.title,
       description: movie.description,
       posterURL: movie.posterURL,
-      rating: movie.rating,
+      rating: rating/20,
     };
     addMovie(newMovie);
   };
@@ -81,11 +66,11 @@ function AddMovie({ addMovie }) {
         <div>
           <label>
             Rating:
-            <input
-              type="number"
+            <Rating
               name="rating"
-              value={movie.rating}
-              onChange={handleMovie}
+              onClick={handleRating}
+              ratingValue={rating}
+              allowHalfIcon
             />
           </label>
         </div>
@@ -96,5 +81,4 @@ function AddMovie({ addMovie }) {
     </div>
   );
 }
-
 export default AddMovie;
