@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import Filter from "./Filter";
 import MovieCard from "./MovieCard";
 
-function MovieList({movies}) {
+function MovieList(props) {
   return (
     <div>
-      <div>
-      
-      </div>
-      <Filter movies={movies}/>
       <div
         style={{
           display: "flex",
@@ -17,7 +12,7 @@ function MovieList({movies}) {
           flexDirection: "column",
         }}
       >
-        {movies.map((movie) => (
+        {props.moviesToDisplay.map((movie) => (
           <MovieCard key={movie.id} value={movie} />
         ))}
       </div>

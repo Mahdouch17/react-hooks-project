@@ -1,10 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
 import AddMovie from "./components/AddMovie";
 import MovieList from "./components/MovieList";
 import { useState } from "react";
 import AddButton from "./components/AddButton";
 import ReturnButton from "./components/ReturnButton";
+import Filter from "./components/Filter";
 
 function App() {
   const movies = [
@@ -36,6 +36,22 @@ function App() {
   const [films, setFilms] = useState(movies);
   const [show, setShow] = useState(false);
 
+  const [keyword, setKeyword] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const handleFilter = (e) => {
+    setKeyword(e.target.value);
+  };
+  const handleRating = (e) => setRating(e);
+
+  const filteredMovies = films.filter((movie) => {
+    return (
+      movie.title.toLowerCase().includes(keyword.toLowerCase()) &&
+      movie.rating == rating / 20
+    );
+  });
+  const moviesToDisplay = keyword ? filteredMovies : films;
+
   const handleAddClickBtn = () => setShow(true);
   const handleReturnClickBtn = () => setShow(false);
 
@@ -54,7 +70,13 @@ function App() {
         ) : (
           <div>
             <AddButton onClick={handleAddClickBtn} />
-            <MovieList movies={films} />
+            <Filter
+              keyword={keyword}
+              handleFilter={handleFilter}
+              rating={rating}
+              handleRating={handleRating}
+            />
+            <MovieList moviesToDisplay={moviesToDisplay} />
           </div>
         )}
       </div>

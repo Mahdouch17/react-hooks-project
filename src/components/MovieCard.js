@@ -19,10 +19,10 @@ function MovieCard(props) {
       <div>{props.value.description}</div>
       <div>
         <Rating
-          readonly={true}
+          readonly
           onClick
           ratingValue={props.value.rating}
-          allowHalfIcon={true}
+          allowHalfIcon
         />
       </div>
     </div>
